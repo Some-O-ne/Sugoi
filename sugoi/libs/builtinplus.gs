@@ -1,4 +1,4 @@
-import_code("color.gs")
+
 import_code("checks.gs")
 
 list.map = function(callback)
@@ -22,7 +22,12 @@ list.removeAll = function(str)
 
 	return copy
 end function
-
+list.fillUntil = function(len,with)
+	while self.len < len
+		self.push(with)
+	end while
+	return self
+end function
 string.color = function(c)
 	
 	if @c isa globals.color then
