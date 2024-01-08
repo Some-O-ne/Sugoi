@@ -5,8 +5,7 @@ import_code("/libs/checks.gs")
 import_code("/libs/sessions.gs")
 import_code("/libs/commands.gs")
 import_code("/libs/cgui.gs")
-// /libs folder? you mean /lib? or /libs that you made for this code?
-// either way, I recomend keeping your importable code compiled and in your home folder.
+
 
 _ = function(d)
 	c = new color
