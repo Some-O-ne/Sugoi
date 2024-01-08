@@ -1,4 +1,3 @@
-import_code("builtinplus.gs")
 color = {}
 color.RGBfill = function(r,g,b)
 	_ = function(el,idx,arr)
@@ -33,3 +32,4 @@ color.HSVfill = function(h,s,v)
 	end function
   self.RGBfill(f(5,h,s,v)*255,f(3,h,s,v)*255,f(1,h,s,v)*255)  
 end function
+

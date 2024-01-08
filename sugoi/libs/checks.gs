@@ -41,3 +41,4 @@ checks.isPathAlphaNumeric = function(path)
     if not self.isA(@path,string) then return false
     return path.matches("^[A-z0-9\/\.]+$").indexes.hasIndex(0)
 end function
+

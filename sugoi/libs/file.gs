@@ -1,8 +1,4 @@
 
-
-
-import_code("builtinplus.gs")
-
 path = {}
 path.isValidPath = function(path)
     if not @path isa string then return false

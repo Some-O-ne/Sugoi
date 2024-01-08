@@ -3,11 +3,11 @@ import_code("checks.gs")
 import_code("builtinplus.gs")
 import_code("theme.gs")
 import_code("sessions.gs")
+
 cgui = {}
 
 cgui.logo = function(centered, size, colorFunction, text)
 	logo = ""
-	
 	if centered then
 		logo = logo + "<align=center>"
 	end if
@@ -34,10 +34,11 @@ cgui.prompt = function()
 	prompt = prompt + s.user.color(theme.highlightB)
 	prompt = prompt + "<mspace=7px>]—[</mspace>"
 	prompt = prompt + s.globalIP.color(theme.highlightA)
-	prompt = prompt + " -> "
+	prompt = prompt + " -<mspace=1px>-></mspace> "
 	prompt = prompt + s.localIP.color(theme.highlightB)
 	prompt = prompt + "<mspace=7px>]—(</mspace>"
 	prompt = prompt + s.dir.color(theme.light)
 	prompt = prompt + ")<pos=-5px><voffset=-8px>|<pos=-5px><voffset=-24px>|<voffset=-33px><pos=0px>———<space=-7px><voffset=-35px>> "
 	return prompt.color(theme.base)
 end function
+

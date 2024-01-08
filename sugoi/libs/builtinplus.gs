@@ -30,7 +30,7 @@ list.fillUntil = function(len,with)
 end function
 string.color = function(c)
 	
-	if @c isa globals.color then
+	if @c isa color then
 		return "<color=#" + c.getHex + ">" + self + "</color>"
 	end if
 	colored = ""
@@ -54,3 +54,4 @@ end function
 number.isBetween = function(a, b)
 	return self >= a and self <= b
 end function
+
