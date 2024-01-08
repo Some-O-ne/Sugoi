@@ -54,4 +54,9 @@ end function
 number.isBetween = function(a, b)
 	return self >= a and self <= b
 end function
+string.matchesplus= function(regex,rules="m")
+	if not self then return false
+	match = self.matches(regex,rules)
+	return match.hasIndex(0) and match[0].len == self.len
+end function
 
