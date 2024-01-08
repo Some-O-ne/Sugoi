@@ -141,7 +141,7 @@ end function
 commandsController.register(touch,"touch")
 
 alias = new command
-alias.args = [{"name":"name"},{"name":"name"}]
+alias.args = [{"name":"name","displayName":"commandName"},{"name":"name","displayName":"newName"}]
 alias.description = "Add a new [name] for a [command]"
 alias.__run = function(args)
 	command = args[0]
@@ -244,8 +244,9 @@ help.__run = function(args)
 			wrap = ["[","]"]
 			if arg.hasIndex("default") then wrap = ["(",")"]
 			name = arg.name
+			if arg.hasIndex("displayName") then name = arg.displayName
 			if arg.hasIndex("options") then name = name + ": "+arg.options.join("|")
-			text = text + wrap.join(name).color(theme.highlightB)
+			text = text + wrap.join(name).color(theme.highlightB)+" "
             // if not arg.hasIndex("default") and not arg.hasIndex("options") then text = text + ("[" + arg.name + "] ").color(theme.highlightB)
             // if arg.hasIndex("default") and not arg.hasIndex("options") then text = text + ("(" + arg.name + ") ").color(theme.highlightB)
             // if arg.hasIndex("options") and not arg.hasIndex("default") then text = text + ("(" + arg.options.join("|") + ") ")
