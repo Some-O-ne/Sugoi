@@ -1,4 +1,6 @@
 import_code("sessions.gs")
+
+import_code("logger.gs")
 command = {"args":[],"__run":null,"supportedObjects":[]}
 
 command.execute = function(args)
@@ -7,29 +9,6 @@ command.execute = function(args)
 end function
 
 
-ArgsValidator = {}
-ArgsValidator["ip"] = @is_valid_ip
-ArgsValidator["partialIP"] = function(partialIp)
-   match = matches("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){0,2}$","m")
-    // don't ask me how that regex works
-	return match.hasIndex(0) and match[0].len == partialIp.len
-end function
-ArgsValidator["path"] = function(path)
-    match = path.matches("^\/{0,1}([A-z0-9.]+\/{0,1})*","m") // i made it myself, i think it works
-	return match.hasIndex(0) and match[0].len == path.len
-end function
-ArgsValidator["name"] = function(name)
-	match = name.matches("^[A-z]+","m")
-	return match.hasIndex(0) and match[0].len == name.len
-end function
-ArgsValidator["number"] = function(number)
-	match = number.matches("^[0-9]+","m")
-	return match.hasIndex(0) and match[0].len == number.len
-end function
-ArgsValidator["filename"] = function(filename)
-	match = filename.matches("^[A-z0-9]+.{0,1}[A-z0-9]*","m")
-	return match.hasIndex(0) ans match[0].len == filename.len
-end function
 
 commandsController = {"__commands":{}}
 commandsController.tryExecute = function(name,args)
@@ -62,6 +41,29 @@ end function
 
 
 
+ArgsValidator = {}
+ArgsValidator["ip"] = @is_valid_ip
+ArgsValidator["partialIP"] = function(partialIp)
+   match = matches("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){0,2}$","m")
+    // don't ask me how that regex works
+	return match.hasIndex(0) and match[0].len == partialIp.len
+end function
+ArgsValidator["path"] = function(path)
+    match = path.matches("^\/{0,1}([A-z0-9.]+\/{0,1})*","m") // i made it myself, i think it works
+	return match.hasIndex(0) and match[0].len == path.len
+end function
+ArgsValidator["name"] = function(name)
+	match = name.matches("^[A-z]+","m")
+	return match.hasIndex(0) and match[0].len == name.len
+end function
+ArgsValidator["number"] = function(number)
+	match = number.matches("^[0-9]+","m")
+	return match.hasIndex(0) and match[0].len == number.len
+end function
+ArgsValidator["filename"] = function(filename)
+	match = filename.matches("^[A-z0-9]+.{0,1}[A-z0-9]*","m")
+	return match.hasIndex(0) ans match[0].len == filename.len
+end function
 
 
 

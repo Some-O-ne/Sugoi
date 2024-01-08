@@ -1,3 +1,4 @@
+import_code("builtinplus.gs")
 color = {}
 color.RGBfill = function(r,g,b)
 	_ = function(el,idx,arr)

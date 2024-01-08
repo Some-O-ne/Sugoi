@@ -1,12 +1,6 @@
 import_code("libs/math.gs")
-import_code("libs/builtinplus.gs")
-import_code("libs/color.gs")
-import_code("libs/checks.gs")
-import_code("libs/sessions.gs")
 import_code("libs/commands.gs")
 import_code("libs/cgui.gs")
-import_code("libs/file.gs")
-import_code("libs/logger.gs")
 
 _ = function(d)
 	c = new color
