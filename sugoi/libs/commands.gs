@@ -34,11 +34,19 @@ commandsController.tryExecute = function(name,args)
 end function
 commandsController.register = function(command,name)
     self.__commands[name] = command
-	if globals.hasIndex(command) then globals.remove  globals.indexOf(command)
+	if globals.indexOf(command) != -1 then globals.remove  globals.indexOf(command)
 	
 end function
-
-
+commandsController.tryExecuteString = function(str)
+	if not @str isa string or str.len < 1 then return false
+	return self.tryExecute(str.split(" ")[0],str.split(" ")[1:])	
+end function
+commandsController.tryExecuteFile = function(fileHandler)
+	if not fileHandler or not fileHandler.getFile.get_content then return false
+	for line in fileHandler.getFile.get_content.split(char(10))
+		if not self.commandsController.tryExecuteString(line) then return false
+	end for
+end function
 
 
 ArgsValidator = {}
@@ -79,10 +87,9 @@ cd.description = "Switches current session's working folder"
 cd.supportedObjects = ["shell","computer","file","ftpshell"]
 cd.__run = function(args)
 	path = args[0]
-	file = new fileHandler
 	s = sessions.getCurrentSession
-	file.init(s.object, s.dir)
-	
+	file = new fileHandler(s.object, s.dir)
+
 	if not file.changeDir(path) then
 		return logger.log(path + " doesn't exist", 1)
 	end if
@@ -99,8 +106,7 @@ ls.supportedObjects = ["shell","computer","file","ftpshell"]
 ls.__run = function(args)
 	path = args[0]
 	s = sessions.getCurrentSession
-	file = new fileHandler
-	file.init(s.object, s.dir+"/"+path)
+	file = new fileHandler(s.object, s.dir+"/"+path)
 	content = file.getContents
 	text = ""
 	for file in content
@@ -156,8 +162,7 @@ cat.supportedObjects = ["shell","computer","file","ftpshell"]
 cat.__run = function(args)
 	s = sessions.getCurrentSession
 	filename = args[0]
-	file = new fileHandler
-	file.init(s.object, s.dir)
+	file = new fileHandler(s.object, s.dir)
 	
 	if not file.changeDir(filename) then
 		return logger.log( filename + " doesn't exist", 1)
@@ -170,7 +175,7 @@ cat.__run = function(args)
 	end if
 	
 
-	if not file.has_permission("r") then
+	if not file.getFile.has_permission("r") then
 		return logger.log("No permission to read " + filename,2)
 	end if
 
@@ -230,6 +235,10 @@ nmap.__run = function(args)
 end function
 commandsController.register(nmap, "nmap")
 
+
+
+
+
 help = new command
 help.description = "Help on commands"
 help.args = []
@@ -252,7 +261,7 @@ help.__run = function(args)
             // if arg.hasIndex("options") and not arg.hasIndex("default") then text = text + ("(" + arg.options.join("|") + ") ")
 			
 		end for
-
+		get_shell.start_terminal
 		text = text + " - ".color(theme.base)
 		text = text + entry.value.description.color(theme.light) + "\n"
 	end for
