@@ -170,14 +170,13 @@ ls.__run = function(args)
 			if file.is_folder and recursive then 
 				text = text +  ("\n"*((file.get_files+file.get_folders) != []))
 			end if
-
-			padding = " "
 			color = theme.warning
 			
 			if file.has_permission("r") and file.has_permission("w") then
 				color = theme.success
 			end if
-			text = text + "<space="+5*file.path[1:].split("/").len-1+"px>" // basically if file.path = "/home/a" then "/home/a" -> "home/a" -> ["home","a"] -> 2 -> 1 and " "*1 = " "
+			
+			if recursive then text = text + (("—"*file.path[1:].split("/").len-1)+"<voffset=-1px><space=-5px>><space=5px>").color(theme.base) // basically if file.path = "/home/a" then "/home/a" -> "home/a" -> ["home","a"] -> 2 -> 1 and "."*1 = "."
 			text = text + file.permissions.color(theme.base) + " "
 			_ = ("r" * file.has_permission("r") + "w" * file.has_permission("w") + "x" * file.has_permission("x"))
 
