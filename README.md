@@ -29,8 +29,8 @@ Before you begin the build process, ensure you have the following tools installe
 
 1. Within Grey Hack, build and run each `installerX.src` file.
 2. Change your directory to `/root` using the command:
-   > [!Note]
-   > The installation directory for the installers can be customized in the Greybel extension settings.
+> [!Note]
+> The installation directory for the installers can be customized in the Greybel extension settings.
 3. Compile the main script to your preferred location in the game with:
    ```
    build main.gs <YourTargetDirectory>
@@ -39,4 +39,4 @@ Before you begin the build process, ensure you have the following tools installe
 
 ## Getting Started with the Tool
 
-Optionally, you can create init.sugoi file at /home/<Your Username>/Config with commands which will get executed at the start of runtime. This is useful for Atlases, Custom Presets and more
+Optionally, you can create init.sugoi file at `/home/<YourUsername>/Config` with commands which will get executed at the start of runtime. This is useful for Atlases, Custom Presets and more
